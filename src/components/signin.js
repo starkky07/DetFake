@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faKey, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import $ from 'jquery'
-import './../styles/signin.css'
+import '../styles/signin.css'
 
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'

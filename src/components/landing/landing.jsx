@@ -3,20 +3,20 @@ import React, { Component } from 'react'
 // reactstrap components
 import {
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  ListGroupItem,
-  ListGroup,
-  Container,
+  // Card,
+  // CardHeader,
+  // CardBody,
+  // CardFooter,
+  // CardTitle,
+  // ListGroupItem,
+  // ListGroup,
+  // Container,
   Row,
   Col
 } from "reactstrap";
 
-import NavBar from './../helper/Navbar'
-import Footer from './../helper/Footer'
+import NavBar from '../helper/Navbar'
+import Footer from '../helper/Footer'
 
 class Landing extends Component {
     componentDidMount() {
@@ -34,32 +34,32 @@ class Landing extends Component {
                     <img
                     alt="..."
                     className="path"
-                    src={require("./../../styles/assets/img/blob.png")}
+                    src={require("../../styles/assets/img/blob.png")}
                     />
                     <img
                     alt="..."
                     className="path2"
-                    src={require("./../../styles/assets/img/path2.png")}
+                    src={require("../../styles/assets/img/path2.png")}
                     />
                     <img
                     alt="..."
                     className="shapes triangle"
-                    src={require("./../../styles/assets/img/triunghiuri.png")}
+                    src={require("../../styles/assets/img/triunghiuri.png")}
                     />
                     <img
                     alt="..."
                     className="shapes wave"
-                    src={require("./../../styles/assets/img/waves.png")}
+                    src={require("../../styles/assets/img/waves.png")}
                     />
                     <img
                     alt="..."
                     className="shapes squares"
-                    src={require("./../../styles/assets/img/patrat.png")}
+                    src={require("../../styles/assets/img/patrat.png")}
                     />
                     <img
                     alt="..."
                     className="shapes circle"
-                    src={require("./../../styles/assets/img/cercuri.png")}
+                    src={require("../../styles/assets/img/cercuri.png")}
                     />
                     <div className="content-center">
                     <Row className="row-grid justify-content-between align-items-center text-left">
@@ -91,7 +91,7 @@ class Landing extends Component {
                           <img
                               alt="..."
                               className="img-fluid"
-                              src={require("./../../styles/assets/img/ripp.png")}
+                              src={require("../../styles/assets/img/ripp.png")}
                           />
                           </Col>
                       </Row>
