@@ -10,8 +10,8 @@ function App() {
     <BrowserRouter>
       <Switch>
       <Route path="/detect" component={ Detector }/>
-        <Route path="/signin" component={ Signin }/>
-        <Route path="/" component={ Landing }/>  
+      <Route path="/signin" component={ Signin }/>
+      <Route path="/" component={ Landing }/>  
       </Switch> 
     
     </BrowserRouter>
