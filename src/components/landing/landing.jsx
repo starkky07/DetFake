@@ -1,0 +1,106 @@
+import React, { Component } from 'react'
+// import { Line } from "react-chartjs-2";
+// reactstrap components
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  ListGroupItem,
+  ListGroup,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
+
+import NavBar from './../helper/Navbar'
+import Footer from './../helper/Footer'
+
+class Landing extends Component {
+    componentDidMount() {
+        document.body.classList.toggle("landing-page");
+      }
+      componentWillUnmount() {
+        document.body.classList.toggle("landing-page");
+      }
+    render() {
+        return(
+            <div>
+                <NavBar/>
+                <div className="wrapper">
+                <div className="page-header">
+                    <img
+                    alt="..."
+                    className="path"
+                    src={require("./../../styles/assets/img/blob.png")}
+                    />
+                    <img
+                    alt="..."
+                    className="path2"
+                    src={require("./../../styles/assets/img/path2.png")}
+                    />
+                    <img
+                    alt="..."
+                    className="shapes triangle"
+                    src={require("./../../styles/assets/img/triunghiuri.png")}
+                    />
+                    <img
+                    alt="..."
+                    className="shapes wave"
+                    src={require("./../../styles/assets/img/waves.png")}
+                    />
+                    <img
+                    alt="..."
+                    className="shapes squares"
+                    src={require("./../../styles/assets/img/patrat.png")}
+                    />
+                    <img
+                    alt="..."
+                    className="shapes circle"
+                    src={require("./../../styles/assets/img/cercuri.png")}
+                    />
+                    <div className="content-center">
+                    <Row className="row-grid justify-content-between align-items-center text-left">
+                      <Col lg="6" md="6">
+                        <h1 className="text-white">
+                          We keep you safe from<br />
+                          <span className="text-white">Fake News</span>
+                        </h1>
+                        <p className="text-white mb-3">
+                        Fake news can become extremely influential and has the ability to spread exceedingly fast. 
+                        With the increase of people using social media, they are being exposed to vast information every day. 
+                        Misinformation can be difficult to correct and may have lasting implications.
+                        So labelling and fact checking is the only way to make sure we are safe from the mob ignorance. But the vastness of information in internet make it hard to  manually filter. 
+                        Hence we are leveraging the power of Machine Learning to make the fake news detection easier..
+                        </p>
+                        <div className="btn-wrapper mb-3 button" >
+                            <Button
+                            className="nav-link d-none d-lg-block"
+                            color="info"
+                            href="/detect"
+                            >
+                           Start Detecting <i className="tim-icons icon-double-right" /> 
+                            </Button>
+  
+                        </div>
+                          
+                          </Col>
+                          <Col lg="4" md="5">
+                          <img
+                              alt="..."
+                              className="img-fluid"
+                              src={require("./../../styles/assets/img/ripp.png")}
+                          />
+                          </Col>
+                      </Row>
+                      </div>
+                    </div>
+                    </div>
+                <Footer/>
+            </div>
+        )
+    }
+}
+export default Landing;
