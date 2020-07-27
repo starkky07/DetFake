@@ -1,34 +1,36 @@
 import React, { Component } from 'react'
-// import { Line } from "react-chartjs-2";
-// reactstrap components
 import {
   Button,
-  // Card,
-  // CardHeader,
-  // CardBody,
-  // CardFooter,
-  // CardTitle,
-  // ListGroupItem,
-  // ListGroup,
-  // Container,
   Row,
   Col
 } from "reactstrap";
 
 import NavBar from '../helper/Navbar'
 import Footer from '../helper/Footer'
+import { connect } from 'react-redux'
 
 class Landing extends Component {
     componentDidMount() {
+        
         document.body.classList.toggle("landing-page");
-      }
-      componentWillUnmount() {
+    }
+    componentWillUnmount() {
         document.body.classList.toggle("landing-page");
-      }
+    }
+    componentDidUpdate () {
+      console.log(this.props)
+    }
+    
     render() {
+      const { isAuthenticated } = this.props;
+      let el = null
+        if (isAuthenticated && this.props.user ) {
+        el = <h1>{ this.props.user }</h1> 
+        }
         return(
             <div>
                 <NavBar/>
+                
                 <div className="wrapper">
                 <div className="page-header">
                     <img
@@ -62,6 +64,7 @@ class Landing extends Component {
                     src={require("../../styles/assets/img/cercuri.png")}
                     />
                     <div className="content-center">
+                    {el}
                     <Row className="row-grid justify-content-between align-items-center text-left">
                       <Col lg="6" md="6">
                         <h1 className="text-white">
@@ -103,4 +106,11 @@ class Landing extends Component {
         )
     }
 }
-export default Landing;
+const mapStateToProps = (state) => {
+  return {
+    is_Authenticated: state.authReducer.isAuthenticated,
+    user: state.authReducer.user
+  }
+}
+
+export default connect(mapStateToProps,null)(Landing);

@@ -7,6 +7,7 @@ import './styles/app.sass'
 import {BrowserRouter, Route, Switch } from 'react-router-dom'
 function App() {
   return (
+    
     <BrowserRouter>
       <Switch>
       <Route path="/detect" component={ Detector }/>

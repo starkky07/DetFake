@@ -1,0 +1,56 @@
+.loadingContainer
+    position: fixed
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    display: none
+    z-index: 60
+
+.loadingContainer:hover
+    cursor: progress !important
+    
+.loadingOverlay
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 50
+    background: rgba(0, 0, 0, 0.6)
+    display: none
+
+.loadingBarsContainer
+    position: relative
+    width: 100%
+    height: 5px
+
+.loading
+    position: absolute
+    height: 5px
+    
+.orangeBars
+    background: $orange
+    animation: loadingAnimation 1s 0.1s infinite
+
+.blueBars
+    background: $blue
+    animation: loadingAnimation 1s 0.2s infinite
+
+.greenBars
+    background: $green
+    animation: loadingAnimation 1s 0.3s infinite
+
++keyframes(loadingAnimation)
+    0%
+        left: 0px
+        width: 0px
+
+    50%
+        left: 50%
+        width: 20px
+
+    100%
+        left: 100%
+        width: 0px
+

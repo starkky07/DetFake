@@ -1,0 +1,246 @@
+$d: 40px
+$h: 470px
+$hh: 375px
+
+.error
+    border-bottom-color: $google_plus !important
+
+.errorMessage
+    display: none
+    position: absolute
+    top: 7px
+    left: 0
+    right: 0
+    text-align: center
+    color: $google_plus
+    font-size: 10px
+
+.loginContainer
+    visibility: hidden
+    height: 0px
+    width: 320px
+    position: fixed
+    right: 0px
+    background: $login_background
+    z-index: 1
+    transition: 0.5s  
+    overflow: hidden  
+    border-left: 2px solid $orange
+    font-family: Montserrat, cursive
+
+.showLogin
+    height: $h
+    visibility: visible !important
+
+.login-toggle
+    display: none
+    position: absolute
+    font-size: 30px
+    font-weight: 400
+    color: $login_text_color
+    top: 10px
+    right: 10px
+
+.formContainer
+    position: relative
+    padding: 20px
+    width: 100%
+    overflow: hidden
+    height: $h
+
+.switch
+    display: flex
+    position: relative
+    align-items: center
+    justify-content: center
+
+.switch div
+    font-size: 25px
+    color: $login_lable_color
+    font-weight: 600
+    cursor: pointer
+
+.switch div.active
+    color: $login_text_color !important
+    font-weight: 300 !important
+
+.switch div.s
+    font-weight: 400
+    color: $orange
+    font-size: 45px
+    cursor: default
+
+#sign-up, #sign-in
+    position: relative
+    padding-top: 50px
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: $hh
+
+#sign-up
+    display: none
+
+#sign-up .input
+    border-bottom-width: 1px !important
+    margin-bottom: 0px !important
+
+.input
+    border: none
+    border-bottom: 5px solid $login_lable_color
+    margin-bottom: 10px
+    padding: 10px 0px
+    background: transparent
+    width: 100%
+    color: $login_text_color
+    font-size: 18px
+    font-weight: 200
+    transition: 0.3s
+
+.small
+    font-size: 10px
+    margin-top: -5px
+    color: $blue
+    text-decoration: underline
+
+.small:hover
+    cursor: pointer
+
+.input:focus
+    border-bottom-color: $orange
+
+.login-button
+    display: flex
+    align-items: center
+    justify-content: center
+    position: absolute
+    width: 100%
+    bottom: 0px
+
+.login-button div
+    height: $d
+    width: $d
+    border-radius: 50%
+    background: $login_lable_color
+    display: flex
+    align-items: center
+    justify-content: center
+    transition: 0.8s
+
+.login-button div > div
+    font-size: 20px
+    font-weight: 600
+    color: $login_text_color
+
+.login-button div > div > i
+    margin-left: 5px
+
+.login-button.active div
+    background: $orange
+    cursor: pointer
+
+.or
+    position: relative
+    padding: 40px 0px
+
+.or hr
+    width: 100%
+    margin: 0px
+    height: 1px
+
+.or div
+    font-size: 15px
+    color: $login_text_color
+    position: absolute
+    right: 0
+    left: 0
+    top: 0
+    bottom: 0
+    margin: auto
+    width: 50px
+    height: 30px
+    display: flex
+    align-items: center
+    justify-content: center
+    background: $login_background
+
+.social-login
+    display: flex
+    position: relative
+    align-items: center
+    flex-direction: column 
+    width: 100%
+
+.social-login div
+    font-size: 15px
+    color: $login_lable_color
+
+.social-login .icon-list
+    display: flex
+    flex-direction: row
+    width: 130px
+    justify-content: space-around
+    padding-top: 15px
+
+.icon-list div:hover
+    cursor: pointer
+
+.forgot-modal
+    position: fixed
+    display: none
+    align-items: center
+    justify-content: center
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, 0.7)
+    z-index: 999999
+
+.forgot-container
+    width: 400px
+    position: relative
+    height: 150px
+    display: flex
+    background: #222222
+    border-left: 2px solid $orange
+    align-items: center
+    justify-content: center
+    padding: 30px
+    font-family: Montserrat
+
+.forgot-container .input
+    border-bottom-width: 2px !important
+
+.forgot-container button
+    border: 1px solid $login_lable_color
+    background: $login_lable_color
+    padding: 8px
+    color: #fff
+
+.forgot-container button.active
+    background: $orange
+    border-color: $orange
+
+.cross
+    position: absolute
+    font-size: 20px
+    font-weight: 600
+    color: #ffffff
+    top: 10px
+    right: 10px
+    cursor: pointer
+
+.greetings
+    font-size: 30px
+    color: #f7f7f7
+    font-weight: 600
+
+.after_login_link_div
+    padding: 10px
+    color: #f7f7f7
+    text-decoration: underline
+
+.after_login_link_div:hover
+    color: $blue
+    cursor: pointer

@@ -3,12 +3,6 @@ import {
   Button,
   Card,
   CardBody,
-//   CardHeader,
-//   CardFooter,
-//   CardTitle,
-//   ListGroupItem,
-//   ListGroup,
-//   FormText,
   Label,
   Input,
   Form,
@@ -16,7 +10,6 @@ import {
   Row,
   Col,
   Modal,
-  ModalHeader, 
   ModalBody, 
   ModalFooter 
 } from "reactstrap";

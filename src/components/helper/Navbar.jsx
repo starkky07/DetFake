@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -15,13 +15,15 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
+import signin from '../signin';
 
 class NavBar extends Component {
     constructor(props){
         super(props);
         this.state = {
             collapseOpen: false,
-            color: "navbar-transparent"
+            color: "navbar-transparent",
+            user: ""
         }
         this.changeColor = this.changeColor.bind(this);
         this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -30,6 +32,16 @@ class NavBar extends Component {
 
     }
     componentDidMount() {
+       if(this.props.user){
+          
+           var s = String(this.props.user);
+           s = s.substring(0, s.indexOf('@'));
+           this.setState({
+               user: s
+           })
+           console.log(this.props.user,s) 
+       }
+        
         window.addEventListener("scroll", this.changeColor);
     }
     componentWillUnmount() {
@@ -65,6 +77,19 @@ class NavBar extends Component {
         })
     }
     render() {
+        let el = null
+        if(this.state.collapseOpen){
+            el = (<NavItem>
+                    <NavLink tag={Link} to="/signin">
+                    Sign in
+                    </NavLink>
+                 </NavItem>)
+        }
+        let signin = 'Sign in'
+        if(this.props.isAuthenticated){
+            signin =  'Hi, '+ this.state.user
+        }
+
         return(
             <Navbar
             className={"fixed-top "+ this.state.color }
@@ -101,7 +126,7 @@ class NavBar extends Component {
                     <div className="navbar-collapse-header">
                         <Row>
                             <Col className="collapse-brand" xs="6">
-                            <a href="#pablo" onClick={e => e.preventDefault()}>
+                            <a href="/" onClick={e => e.preventDefault()}>
                                 DetFake
                             </a>
                             </Col>
@@ -126,17 +151,16 @@ class NavBar extends Component {
                             title="Github view"
                             >
                             <i className="fab fa-github" />
-                            <p className="d-lg-none d-xl-none">Twitter</p>
                             </NavLink>
                         </NavItem>
-                        
+                        {el}
                         <NavItem>
                             <Button
                             className="nav-link d-none d-lg-block"
                             color="primary"
                             href="/signin"
                             >
-                            <i className="tim-icons icon-spaceship" /> Sign in
+                            <i className="tim-icons icon-spaceship" /> {signin}
                             </Button>
                         </NavItem>
                         <NavItem>
@@ -156,4 +180,13 @@ class NavBar extends Component {
         )
     }
 }
-export default NavBar;
+
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.authReducer.isAuthenticated,
+        user: state.authReducer.user
+    };
+}
+
+
+export default connect(mapStateToProps, null)(NavBar);
