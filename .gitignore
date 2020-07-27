@@ -16,7 +16,7 @@
 .rough
 .DS_Store
 .env.local
-.env.development.
+.env.development
 .env.test.local
 .env.production.local
 
