@@ -1,7 +1,5 @@
 import { auth } from './../../firebase';
-import * as actions from './actionTypes'
-
-
+import * as actions from './actionTypes';
 
 const requestLogin = () => {
   return {
@@ -57,24 +55,10 @@ export const signup = (email, password) => async dispatch => {
   try{
     auth
     .createUserWithEmailAndPassword(email, password)
-    .then( (dataBeforeEmail) => {
-      auth.onAuthStateChanged( (user) => {
-        user.sendEmailVerification();
-      })
-    })
-    .then( (dataAfterEmail) => {
-      auth.onAuthStateChanged( (user) => {
-        if(user.emailVerified){
-          dispatch({
-            type: actions.SIGNUP_SUCCESS,
-            payload: "Your account was successfully created! Now you need to verify your e-mail address, please go check your inbox."
-          })
-        } else {
-          dispatch({
-            type: actions.SIGNUP_ERROR,
-            payload: "Something went wrong."
-          })
-        }
+    .then( (user) => {
+      dispatch({
+        type: actions.SIGNUP_SUCCESS,
+        payload: user.user.email
       })
     })
     .catch( (err) => {
@@ -90,29 +74,6 @@ export const signup = (email, password) => async dispatch => {
     })
   }
 }
-
-// export const signin = (email, password) => async dispatch => {
-//   let history = useHistory();
-//   try {
-//     auth
-//     .signInWithEmailAndPassword(email, password)
-//     .then( () => {
-//         dispatch({ type: actions.SIGNUP_SUCCESS});
-//         history.push('/');
-//     })
-//     .catch( () => {
-//       dispatch({
-//         type: actions.SIGNIN_ERROR,
-//         payload: "Invalid Login Credentials"
-//       })
-//     })
-//   } catch (err) {
-//       dispatch({
-//         type: actions.SIGNIN_ERROR,
-//         payload: "Invalid Login Credentials"
-//       })
-//   }
-// }
 
 export const resetPassword = email => async dispatch => {
   try {
@@ -157,7 +118,7 @@ export const signin = (email, password) => async dispatch => {
       });
   };
   
-  export const logout = () => dispatch => {
+export const logout = () => dispatch => {
     dispatch(requestLogout());
     auth.signOut()
       .then(() => {

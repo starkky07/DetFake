@@ -13,7 +13,7 @@ import {
   ModalBody, 
   ModalFooter 
 } from "reactstrap";
-
+import { connect } from 'react-redux';
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
 
@@ -105,4 +105,12 @@ class Detector extends Component {
         )
     }
 }
-export default Detector;
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.authReducer.isAuthenticated,
+        user: state.authReducer.user
+    };
+}
+
+
+export default connect(mapStateToProps, null)(Detector);

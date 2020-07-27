@@ -15,7 +15,7 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
-import signin from '../signin';
+import { logout } from './../../store/actions/auth'
 
 class NavBar extends Component {
     constructor(props){
@@ -23,7 +23,7 @@ class NavBar extends Component {
         this.state = {
             collapseOpen: false,
             color: "navbar-transparent",
-            user: ""
+            user: " "
         }
         this.changeColor = this.changeColor.bind(this);
         this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -41,7 +41,6 @@ class NavBar extends Component {
            })
            console.log(this.props.user,s) 
        }
-        
         window.addEventListener("scroll", this.changeColor);
     }
     componentWillUnmount() {
@@ -77,19 +76,50 @@ class NavBar extends Component {
         })
     }
     render() {
-        let el = null
-        if(this.state.collapseOpen){
-            el = (<NavItem>
-                    <NavLink tag={Link} to="/signin">
-                    Sign in
-                    </NavLink>
-                 </NavItem>)
-        }
+        let el = null   
+        let userButton = null
         let signin = 'Sign in'
         if(this.props.isAuthenticated){
             signin =  'Hi, '+ this.state.user
         }
-
+        if(this.state.collapseOpen && !this.props.isAuthenticated){
+            el =        (<NavItem>
+                            <NavLink href="/signin">
+                                {signin}
+                            </NavLink>
+                        </NavItem>);
+        }
+        if(!this.props.isAuthenticated){
+            userButton=(<NavItem>
+                            <Button
+                            className="nav-link d-none d-lg-block"
+                            color="primary"
+                            href="/signin"
+                            >
+                            <i className="tim-icons icon-spaceship" /> {signin}
+                            </Button>
+                        </NavItem>);
+        } else {
+            userButton=(
+                    <div>
+                        <NavItem>
+                            <NavLink href="#" onClick={ (e) => e.preventDefault()}>
+                                {signin}
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <Button
+                            className="nav-link d-none d-lg-block"
+                            color="primary"
+                            href="/"
+                            onClick={this.logout}
+                            >
+                            <i className="tim-icons icon-spaceship" /> Logout
+                            </Button>
+                        </NavItem>                        
+                    </div>
+                    );
+        }
         return(
             <Navbar
             className={"fixed-top "+ this.state.color }
@@ -145,7 +175,7 @@ class NavBar extends Component {
                         <NavItem className="p-0">
                             <NavLink
                             data-placement="bottom"
-                            href="https://github.com/starkky07/Liar-liar-model"
+                            href="https://github.com/starkky07/DetFake"
                             rel="noopener noreferrer"
                             target="_blank"
                             title="Github view"
@@ -154,22 +184,10 @@ class NavBar extends Component {
                             </NavLink>
                         </NavItem>
                         {el}
+                        { userButton }
+
                         <NavItem>
-                            <Button
-                            className="nav-link d-none d-lg-block"
-                            color="primary"
-                            href="/signin"
-                            >
-                            <i className="tim-icons icon-spaceship" /> {signin}
-                            </Button>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink tag={Link} to="/register">
-                            Register
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="https://github.com/Liar-liar-model/issues">
+                            <NavLink href="https://github.com/starkky07/DetFake/issues">
                             Have an issue?
                             </NavLink>
                         </NavItem>
@@ -184,9 +202,14 @@ class NavBar extends Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.authReducer.isAuthenticated,
-        user: state.authReducer.user
+        user: state.authReducer.user,
+        authMsg: state.authReducer.authMsg
     };
 }
+const mapDisptachToProps = (dispatch) => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
 
-
-export default connect(mapStateToProps, null)(NavBar);
+export default connect(mapStateToProps, mapDisptachToProps)(NavBar);

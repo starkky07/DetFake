@@ -8,6 +8,9 @@ const initialState = {
     loginError: false,
     logoutError: false,
     isAuthenticated: false,
+    isSigningUp: false,
+    isSignedUp: true,
+    signUpError: true,
     user: {},
     authMsg: ""
 }
@@ -18,7 +21,8 @@ export default (state=initialState, action) => {
         return {
             ...state,
             isLoggingIn: true,
-            loginError: false
+            loginError: false,
+            authMsg: "Behold, You're abou to explore the truth!!!"
         };
         case actions.LOGIN_SUCCESS:
         return {
@@ -33,7 +37,8 @@ export default (state=initialState, action) => {
             ...state,
             isLoggingIn: false,
             isAuthenticated: false,
-            loginError: true
+            loginError: true,
+            authMsg: "Please check your credentials"
         };
         case actions.LOGOUT_REQUEST:
         return {
@@ -46,7 +51,8 @@ export default (state=initialState, action) => {
             ...state,
             isLoggingOut: false,
             isAuthenticated: false,
-            user: {}
+            user: {},
+            authMsg: "Logged out sucessfully"
         };
         case actions.LOGOUT_FAILURE:
         return {
@@ -65,6 +71,27 @@ export default (state=initialState, action) => {
             ...state,
             isVerifying: false
         };
+        
+        case actions.SIGNUP_REQUEST:
+        return {
+            ...state,
+            isSigningUp: true,
+            authMsg: action.payload
+        }
+        case actions.SIGNUP_SUCCESS:
+        return {
+            ...state,
+            isSigningUp: true,
+            isAuthenticated: true,
+            user: action.payload,
+            authMsg: "Your account was successfully created!"
+        }
+        case actions.SIGNUP_ERROR:
+        return {
+            ...state,
+            signupError: true,
+            authMsg: action.payload
+        }
         default:
         return state;
         };
