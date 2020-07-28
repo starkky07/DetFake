@@ -81,7 +81,7 @@ export default (state=initialState, action) => {
         case actions.SIGNUP_SUCCESS:
         return {
             ...state,
-            isSigningUp: true,
+            isSignedUp: true,
             isAuthenticated: true,
             user: action.payload,
             authMsg: "Your account was successfully created!"

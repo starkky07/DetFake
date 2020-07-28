@@ -8,7 +8,7 @@ import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
 import { connect } from 'react-redux';
 import validate from './helper/validate';
-import { signin, signup, resetPassword} from './../store/actions/auth'
+import { signin, signup, resetPassword} from '../store/actions/auth'
 import { UncontrolledAlert } from 'reactstrap'
   
 class Signin extends Component {
@@ -61,8 +61,10 @@ class Signin extends Component {
         console.log(this.state);
         this.setState({
             newUser: true,
-            confirmPassword: e.target.value
+            confirmPassword: e.target.value,
+            errors: {}
         })
+        // this.props.pro.authMsg = "";
     }
     setReset (){
         this.setState({

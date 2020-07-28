@@ -53,6 +53,10 @@ const verifySuccess = () => {
 
 export const signup = (email, password) => async dispatch => {
   try{
+    dispatch({
+      type: actions.SIGNUP_REQUEST,
+      payload: "Behold, Signing You up!!!"
+    })
     auth
     .createUserWithEmailAndPassword(email, password)
     .then( (user) => {
@@ -62,12 +66,14 @@ export const signup = (email, password) => async dispatch => {
       })
     })
     .catch( (err) => {
+      console.log(err)
       dispatch({
         type: actions.SIGNUP_ERROR,
-        payload: "Something went wrong. Account Can't be created"
+        payload: err.message
       })
     }) 
   } catch (err) {
+    console.log(err)
     dispatch({
       type: actions.SIGNUP_ERROR,
       payload: "Something went wrong. Account Can't be created"

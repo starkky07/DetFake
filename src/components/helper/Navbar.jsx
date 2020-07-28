@@ -82,7 +82,7 @@ class NavBar extends Component {
         if(this.props.isAuthenticated){
             signin =  'Hi, '+ this.state.user
         }
-        if(this.state.collapseOpen && !this.props.isAuthenticated){
+        if(this.state.collapseOpen){
             el =        (<NavItem>
                             <NavLink href="/signin">
                                 {signin}
@@ -100,13 +100,25 @@ class NavBar extends Component {
                             </Button>
                         </NavItem>);
         } else {
-            userButton=(
-                    <div>
+            el = (  <div>                            
                         <NavItem>
+                            <NavLink href="/detect">
+                                {signin}
+                            </NavLink>
+                        </NavItem>    
+                        <NavItem>
+                            <NavLink href="/detect" onClick={this.logout}>
+                                Logout
+                            </NavLink>
+                        </NavItem>
+                    </div> );
+            userButton = (
+                    <div>
+                        {/* <NavItem>
                             <NavLink href="#" onClick={ (e) => e.preventDefault()}>
                                 {signin}
                             </NavLink>
-                        </NavItem>
+                        </NavItem> */}
                         <NavItem>
                             <Button
                             className="nav-link d-none d-lg-block"
