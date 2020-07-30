@@ -28,7 +28,7 @@ class Signin extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
+        this.emailInput = React.createRef();
     };
     componentDidMount() {
         console.log(this.props.isAuthenticated)
@@ -48,6 +48,9 @@ class Signin extends Component {
         })
     }
     componentDidUpdate(){
+        if(pro.authMsg.length !== 0){
+            this.emailInput.current.focus();
+        }
         // this.props.pro.authMsg = ""
         console.log(this.state)
         console.log(this.props.pro)
@@ -147,6 +150,7 @@ class Signin extends Component {
                                 className="form-ctrl" id="userEmail" 
                                 required=""
                                 placeholder="Email"
+                                ref={this.emailInput}
                                 value={ this.state.email }
                                 onChange= { this.handleEmailChange }>
                                 </input>
@@ -168,6 +172,7 @@ class Signin extends Component {
                                 onChange={this.handlePasswordChange}>
                                 </input>
                                 <div className="fa">
+                                {/* <i className="fab fa-key" /> */}
                                 <FontAwesomeIcon icon={faKey} />
                                 </div>
                             </div>
@@ -196,6 +201,7 @@ class Signin extends Component {
                                 type="email" 
                                 className="form-ctrl" 
                                 id="userEmail1" 
+                                ref={this.emailInput}
                                 required="" autoFocus="" title="" autoComplete="" placeholder="Email"
                                 value={ this.state.email }
                                 onChange= { this.handleEmailChange }

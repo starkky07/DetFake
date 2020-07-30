@@ -23,8 +23,9 @@ class Detector extends Component {
         this.state = {
             modalOpen: false
         }
+        this.timeOutId = null
         this.toggleModal = this.toggleModal.bind(this)
-
+        
     }
     toggleModal = () => {
         this.setState({
