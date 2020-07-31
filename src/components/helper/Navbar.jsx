@@ -39,7 +39,7 @@ class NavBar extends Component {
            this.setState({
                user: s
            })
-           console.log(this.props.user,s) 
+           //console.log(this.props.user,s) 
        }
         window.addEventListener("scroll", this.changeColor);
     }

@@ -18,7 +18,7 @@ class Landing extends Component {
         document.body.classList.toggle("landing-page");
     }
     componentDidUpdate () {
-      console.log(this.props)
+      //console.log(this.props)
     }
     
     render() {
@@ -80,7 +80,7 @@ class Landing extends Component {
                         </p>
                         <div className="btn-wrapper mb-3 button" >
                             <Button
-                            className="nav-link d-none d-lg-block"
+                            outline
                             color="info"
                             href="/detect"
                             >

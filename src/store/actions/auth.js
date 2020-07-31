@@ -66,14 +66,14 @@ export const signup = (email, password) => async dispatch => {
       })
     })
     .catch( (err) => {
-      console.log(err)
+      //console.log(err)
       dispatch({
         type: actions.SIGNUP_ERROR,
         payload: err.message
       })
     }) 
   } catch (err) {
-    console.log(err)
+    //console.log(err)
     dispatch({
       type: actions.SIGNUP_ERROR,
       payload: "Something went wrong. Account Can't be created"
@@ -111,7 +111,7 @@ export const signin = (email, password) => async dispatch => {
     dispatch(requestLogin());
     auth.signInWithEmailAndPassword(email, password)
       .then(user => {
-        console.log("User Details",user)
+        //console.log("User Details",user)
         dispatch({
           type: actions.LOGIN_SUCCESS,
           payload: user.user.email

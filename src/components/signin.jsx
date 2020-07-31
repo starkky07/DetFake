@@ -31,7 +31,7 @@ class Signin extends Component {
         this.emailInput = React.createRef();
     };
     componentDidMount() {
-        console.log(this.props.isAuthenticated)
+        //console.log(this.props.isAuthenticated)
         document.body.classList.toggle("landing-page");
         $(".signup").css("display", "none")
         $(".signbtn").click(() => {
@@ -48,12 +48,12 @@ class Signin extends Component {
         })
     }
     componentDidUpdate(){
-        if(pro.authMsg.length !== 0){
+        if(this.props.pro && this.props.pro.authMsg.length !== 0){
             this.emailInput.current.focus();
         }
         // this.props.pro.authMsg = ""
-        console.log(this.state)
-        console.log(this.props.pro)
+        //console.log(this.state)
+        //console.log(this.props.pro)
     }
     componentWillUnmount() {
         document.body.classList.toggle("landing-page");
@@ -61,7 +61,7 @@ class Signin extends Component {
 
     setNewUser (e){
         e.preventDefault()
-        console.log(this.state);
+        //console.log(this.state);
         this.setState({
             newUser: true,
             confirmPassword: e.target.value,
@@ -94,16 +94,16 @@ class Signin extends Component {
             isSubmitting: true,
             errors: validate(this.state.email, this.state.password,this.state.reset)
         })
-        console.log(this.state)
-        console.log("Before Signin",this.props)
+        //console.log(this.state)
+        //console.log("Before Signin",this.props)
         if(Object.keys(this.state.errors).length !== 0 ){
-            console.log(this.state.errors)
+            //console.log(this.state.errors)
             // this.props.pro.authMsg = this.state.errors.passIsStrong
             
         } else {
             if(this.state.newUser){
                 if(this.state.password === this.state.confirmPassword){
-                    console.log("new User")
+                    //console.log("new User")
                     dispatch(signup(this.state.email, this.state.password));
                 } else {
                     this.props.pro.authMsg = "Passwords Don't match!"
@@ -114,9 +114,9 @@ class Signin extends Component {
             } else {
                 dispatch(signin( this.state.email, this.state.password));
             }
-            console.log("After Signin",this.props)
-            console.log(this.state)
-            console.log(this.props.pro)
+            // console.log("After Signin",this.props)
+            //console.log(this.state)
+            //console.log(this.props.pro)
             //cleaning
         }
         

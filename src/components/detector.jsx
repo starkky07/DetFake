@@ -16,18 +16,27 @@ import {
 import { connect } from 'react-redux';
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
+import axios from 'axios'
 
 class Detector extends Component {
     constructor(props){
         super(props)
         this.state = {
-            modalOpen: false
+            modalOpen: false,
+            data : undefined
         }
         this.timeOutId = null
         this.toggleModal = this.toggleModal.bind(this)
         
     }
     toggleModal = () => {
+        axios.get('https://jsonplaceholder.typicode.com/posts?_limit=20')
+        .then( response => {
+            this.setState({
+                data: response.data[5].title
+            })
+        })
+        .catch( err => console.log(err));
         this.setState({
             modalOpen: !this.state.modalOpen
         })
@@ -39,6 +48,10 @@ class Detector extends Component {
         document.body.classList.toggle("landing-page");
       }
     render() {
+        let modalBody = "...loading";
+        if(this.state.data !== undefined){
+            modalBody = this.state.data
+        }
         return(
             <div>
                 <NavBar/>
@@ -85,7 +98,7 @@ class Detector extends Component {
                                 </button>
                                 </div>
                                 <ModalBody>
-                                    <p>Woohoo, you're reading this text in a modal!</p>
+                                    <p>{modalBody}</p>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="secondary" onClick={this.toggleModal}>
