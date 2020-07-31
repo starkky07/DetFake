@@ -11,11 +11,12 @@ import {
   Col,
   Modal,
   ModalBody, 
-  ModalFooter 
+  ModalFooter
 } from "reactstrap";
 import { connect } from 'react-redux';
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
+import Spinner from './helper/Spinner'
 import axios from 'axios'
 
 class Detector extends Component {
@@ -48,7 +49,7 @@ class Detector extends Component {
         document.body.classList.toggle("landing-page");
       }
     render() {
-        let modalBody = "...loading";
+        let modalBody = <Spinner/>
         if(this.state.data !== undefined){
             modalBody = this.state.data
         }
@@ -98,7 +99,7 @@ class Detector extends Component {
                                 </button>
                                 </div>
                                 <ModalBody>
-                                    <p>{modalBody}</p>
+                                    {modalBody}
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="secondary" onClick={this.toggleModal}>

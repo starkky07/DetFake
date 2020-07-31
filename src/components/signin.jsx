@@ -3,9 +3,9 @@ import { Redirect } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faKey, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons'
 import $ from 'jquery'
-import '../styles/signin.css'
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
+import Spinner from './helper/Spinner'
 import { connect } from 'react-redux';
 import validate from './helper/validate';
 import { signin, signup, resetPassword} from '../store/actions/auth'
@@ -48,12 +48,10 @@ class Signin extends Component {
         })
     }
     componentDidUpdate(){
-        if(this.props.pro && this.props.pro.authMsg.length !== 0){
+        if(this.props.pro.loginError || this.props.pro.signUpError){
             this.emailInput.current.focus();
+            // console.log(this.emailInput)
         }
-        // this.props.pro.authMsg = ""
-        //console.log(this.state)
-        //console.log(this.props.pro)
     }
     componentWillUnmount() {
         document.body.classList.toggle("landing-page");
@@ -126,7 +124,11 @@ class Signin extends Component {
         const { isAuthenticated, pro } = this.props;
         let alert = null;
         if(pro.authMsg.length !== 0){
-        alert = <UncontrolledAlert color="warning" >{pro.authMsg}</UncontrolledAlert>
+        if(pro.isLoggingIn || pro.isSignedUp){
+            alert = <Spinner/>
+        } else {
+            alert = <UncontrolledAlert color="warning" >{pro.authMsg}</UncontrolledAlert>
+            }
         }
         if (isAuthenticated) {
             return <Redirect to="/detect" />;

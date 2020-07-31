@@ -99,7 +99,7 @@ class NavBar extends Component {
                             <i className="tim-icons icon-spaceship" /> {signin}
                             </Button>
                         </NavItem>);
-        } else {
+        } else if(this.state.collapseOpen && this.props.isAuthenticated){
             el = (  <div>                            
                         <NavItem>
                             <NavLink href="/detect">
@@ -112,13 +112,15 @@ class NavBar extends Component {
                             </NavLink>
                         </NavItem>
                     </div> );
-            userButton = (
-                    <div>
-                        {/* <NavItem>
-                            <NavLink href="#" onClick={ (e) => e.preventDefault()}>
+        } 
+        else {
+            el = (      <NavItem>
+                            <NavLink href="/detect">
                                 {signin}
                             </NavLink>
-                        </NavItem> */}
+                        </NavItem>  );
+            userButton = (
+                    <div>
                         <NavItem>
                             <Button
                             className="nav-link d-none d-lg-block"

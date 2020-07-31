@@ -9,8 +9,8 @@ const initialState = {
     logoutError: false,
     isAuthenticated: false,
     isSigningUp: false,
-    isSignedUp: true,
-    signUpError: true,
+    isSignedUp: false,
+    signUpError: false,
     user: {},
     authMsg: ""
 }
