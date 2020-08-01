@@ -18,7 +18,8 @@ import { connect } from 'react-redux';
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
 import Spinner from './helper/Spinner'
-import pd from 'paralleldots'
+import request from 'request'
+
 require('dotenv').config()
 
 class Detector extends Component {
@@ -27,12 +28,13 @@ class Detector extends Component {
         this.state = {
             modalOpen: false,
             textInput : "",
-            score: undefined
+            score: undefined,
+            apiKey: process.env.REACT_APP_PARALLELDOTS_API_KEY
         }
         this.timeOutId = null
         this.toggleModal = this.toggleModal.bind(this)
         this.handleTextInput = this.handleTextInput.bind(this)
-        pd.apiKey=process.env.REACT_APP_PARALLELDOTS_API_KEY;
+        // pd.apiKey=process.env.REACT_APP_PARALLELDOTS_API_KEY;
     }
     handleTextInput (e) {
         e.preventDefault();
@@ -42,16 +44,22 @@ class Detector extends Component {
     }
     toggleModal = () => {
         if(!this.state.modalOpen){
-            pd.sentiment(this.state.textInput)
-            .then( response => {
-                var sentiment = JSON.parse(response)
-                console.log(sentiment)
-                console.log(sentiment.sentiment)
-                this.setState({
-                    score: sentiment.sentiment
-                })
+            // pd.sentiment(this.state.textInput)
+            request.post({url:'https://cors-anywhere.herokuapp.com/http://apis.paralleldots.com/v4/sentiment',
+            form: {text:this.state.textInput ,lang_code:"en", api_key:this.state.apiKey}}, 
+            (err,httpResponse,body) => {
+                if(err){
+                    console.log(err)
+                } else {
+                    // console.log(body);
+                    var sentiment = JSON.parse(body)
+                    // console.log(sentiment)
+                    // console.log(sentiment.sentiment)
+                    this.setState({
+                        score: sentiment.sentiment
+                    })
+                }
             })
-            .catch( err => console.log(err));
         }
         this.setState({
             modalOpen: !this.state.modalOpen
