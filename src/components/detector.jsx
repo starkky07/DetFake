@@ -11,36 +11,52 @@ import {
   Col,
   Modal,
   ModalBody, 
-  ModalFooter
+  ModalFooter,
+  Table
 } from "reactstrap";
 import { connect } from 'react-redux';
 import NavBar from './helper/Navbar'
 import Footer from './helper/Footer'
 import Spinner from './helper/Spinner'
-import axios from 'axios'
+import pd from 'paralleldots'
+require('dotenv').config()
 
 class Detector extends Component {
     constructor(props){
         super(props)
         this.state = {
             modalOpen: false,
-            data : undefined
+            textInput : "",
+            score: undefined
         }
         this.timeOutId = null
         this.toggleModal = this.toggleModal.bind(this)
-        
+        this.handleTextInput = this.handleTextInput.bind(this)
+        pd.apiKey=process.env.REACT_APP_PARALLELDOTS_API_KEY;
+    }
+    handleTextInput (e) {
+        e.preventDefault();
+        this.setState({
+            textInput: e.target.value
+        })
     }
     toggleModal = () => {
-        axios.get('https://jsonplaceholder.typicode.com/posts?_limit=20')
-        .then( response => {
-            this.setState({
-                data: response.data[5].title
+        if(!this.state.modalOpen){
+            pd.sentiment(this.state.textInput)
+            .then( response => {
+                var sentiment = JSON.parse(response)
+                console.log(sentiment)
+                console.log(sentiment.sentiment)
+                this.setState({
+                    score: sentiment.sentiment
+                })
             })
-        })
-        .catch( err => console.log(err));
+            .catch( err => console.log(err));
+        }
         this.setState({
             modalOpen: !this.state.modalOpen
         })
+        
     }
     componentDidMount() {
         document.body.classList.toggle("landing-page");
@@ -50,9 +66,33 @@ class Detector extends Component {
       }
     render() {
         let modalBody = <Spinner/>
-        if(this.state.data !== undefined){
-            modalBody = this.state.data
+        if(this.state.score !== undefined){
+            modalBody =    (                         
+                                <Table dark>
+                                <thead>
+                                    <tr>
+                                        <th className="text-muted">TAG</th>
+                                        <th className="text-muted">CONFIDENCE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>POSITIVE</td>
+                                        <td>{ this.state.score.positive}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NEGATIVE</td>
+                                        <td>{ this.state.score.negative}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>NEUTRAL</td>
+                                        <td>{ this.state.score.neutral}%</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                            );
         }
+        
         return(
             <div>
                 <NavBar/>
@@ -68,7 +108,7 @@ class Detector extends Component {
                                 <Label for="Input-Url">Input Url</Label>
                                 <Input type="url" id="Input-Url"></Input>
                             </FormGroup>
-                            <FormGroup>
+                            {/* <FormGroup>
                                 <Label for="DropdownSelection">Type</Label>
                                 <Input type="select" name="Select" color="success" id="DropdownSelection">
                                     <option className="h6">1</option>
@@ -77,10 +117,13 @@ class Detector extends Component {
                                     <option className="h6">4</option>
                                     <option className="h6">5</option>
                                 </Input>
+                            </FormGroup> */}
+                            <FormGroup>
+                                <Label className="text-muted">OR</Label>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="text-input">Input Text</Label>
-                                <Input type="textarea" id="text-input"></Input>
+                                <Input type="textarea" id="text-input" onChange={this.handleTextInput}></Input>
                             </FormGroup>
                             <Button className="btn-round" color="bg-info" onClick={this.toggleModal}>
                             Get Results

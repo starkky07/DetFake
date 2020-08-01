@@ -53,6 +53,6 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.19.2"
+    "paralleldots": "^3.2.5"
   }
 }
